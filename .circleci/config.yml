@@ -10,7 +10,7 @@ references:
       at: *workspace_root
 
 jobs:
-  
+    
   IaC-Assessment:
     docker:
       - image: checkpoint/shiftleft:latest

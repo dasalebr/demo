@@ -24,9 +24,5 @@ workflows:
   version: 2
   ShiftLeft_Demo_Pipeline:
     jobs:
-      - Image-Build          
-      - Code-Scan
       - IaC-Assessment          
-      - Image-Scan:
-          requires:
-            - Image-Build
+      

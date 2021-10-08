@@ -1,0 +1,32 @@
+version: 2.1
+
+references:
+  
+  workspace_root: &workspace_root
+    /tmp/workspace
+    
+  attach_workspace: &attach_workspace
+    attach_workspace:
+      at: *workspace_root
+
+jobs:
+  
+  IaC-Assessment:
+    docker:
+      - image: checkpoint/shiftleft:latest
+    steps:
+      - checkout
+      - run: shiftleft -D iac-assessment -p ./terraform-template -r -64 -s medium -e 3a99f75d-057f-4f6e-8164-baa9bd0c4d8c
+
+  
+
+workflows:
+  version: 2
+  ShiftLeft_Demo_Pipeline:
+    jobs:
+      - Image-Build          
+      - Code-Scan
+      - IaC-Assessment          
+      - Image-Scan:
+          requires:
+            - Image-Build
